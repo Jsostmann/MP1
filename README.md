@@ -64,7 +64,7 @@ The method `getCalendar()` should return all course items, office hour items and
 
 ## The toString() method
 
-The toString method should include all the properties separated by a line separator character. Output should follow the order as listed in the above UML Class Diagrams.
+The toString method should return a String formatted as in the input file. Notice that `TimeBlock.toString()` will not include the `location` or `comment` properties. Most classes will have each property on a new line, `TimeBlock` properties will be separated by a comma.
 
 ## Hanlding ArrayLists
 
@@ -92,21 +92,17 @@ Faculty0 Number of Courses
 Course0 Name
 Course0 Location
 Course0 Number of meeting days
-Course0 Day of the week Start_Time End_Time
+Course0 Day of the week, Start_Time, End_Time
 * repeat for other days
 * repeat for other courses
 Faculty0 Number of office hour sessions
-Office Hours0 Day of the week
-Start_Time
-End_Time
+Office Hours0 Day of the week, Start_Time, End_Time
 * Repeat for other office hours.
 Faculty0 Number of Appointments
 Appointments0 Description
-Appointments0 Day of the week
-Start_Time
-End_Time
+Appointments0 Day of the week, Start_Time, End_Time
 * Repeat for other appointments.
-*Repeat for other faculty
+* Repeat for other faculty
 
 The file will end when there are no more faculty.
 ```
@@ -130,7 +126,7 @@ You must create a driver program (`main()` method) for each level that demonstra
 Complete the `DaysOfWeek` enumerated type, the `TimeBlock` class, the `Course` class and the `Appointment` class. Write a simple driver program that will instantiate an object of each class type, populate the data fields and test the other methods of the classes. Display your output in a `JavaFX Dialog`.
 
 ### Level 2: 10 points
-Complete all of the `Faculty` class except for the `getCalendar()` and `atAGlance()` methods.
+Complete all of the `Course` class and all of the `Faculty` class except for the `getCalendar()` and `atAGlance()` methods.
 
 ### Level 3: 20 points
 Complete all of the `Department` class except for the `loadDepartmentData()` and `saveDepartmentData()`
