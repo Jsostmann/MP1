@@ -21,7 +21,7 @@ GEEN165 Section 3
 3
 Monday, 1200, 1250
 Wednesday, 1200, 1250
-Friday. 1200, 1250
+Friday, 1200, 1250
 4
 Monday, 1330, 1430
 Tuesday, 1300, 1600
@@ -32,7 +32,8 @@ Eat Lunch
 Monday, 1300, 1330
 Eat Lunch
 Wednesday, 1300, 1330
-Kenneth Williams
+Kenneth 
+Williams
 503 McNair Hall
 2
 GEEN163 Sections 1 & 2
