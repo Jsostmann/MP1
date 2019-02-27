@@ -16,16 +16,12 @@ public class Department {
     private String universityName;
     private ArrayList<Faculty> faculty;
 
+    
     public Department() {
 
-        this(null, null, null);
-
-    }
-    public Department(String departmentName, String unitName, String universityName) {
-
-        this.departmentName = departmentName;
-        this.unitName = unitName;
-        this.universityName = universityName;
+        this.departmentName = null;
+        this.unitName = null;
+        this.universityName = null;
         faculty = new ArrayList<>();
 
     }
@@ -35,27 +31,19 @@ public class Department {
       Widget Methods For ArrayList Objects
     */
     public void addFaculty(Faculty fac) {
-
         faculty.add(fac);
-
     }
     public void removeFaculty(Faculty fac) {
-
         faculty.remove(fac);
-
     }
     public Faculty getFaculty(int index) {
         if (index > -1 && index < faculty.size()) {
             return faculty.get(index);
         } else {
-
             return null;
-
         }
-
     }
     public int numFaculty() {
-
         return faculty.size();
     }
 
@@ -108,9 +96,9 @@ public class Department {
         return result;
 
     }
-    private boolean isDuringTime(TimeBlock t, int time) {
+    private boolean isDuringTime(DaysOfWeek day, TimeBlock t, int time) {
 
-        return time >= t.getStartTime() && time <= t.getEndTime();
+        return t.getDay() == day && time >= t.getStartTime() && time <= t.getEndTime();
 
     }
     
@@ -141,7 +129,9 @@ public class Department {
                     String courseName = scan.nextLine();
                     String courseLocation = scan.nextLine();
 
-                    Course course = new Course(courseName, courseLocation);
+                    Course course = new Course();
+                    course.setCourseName(courseName);
+                    course.setLocation(courseLocation);
 
                     int numMeetingDays = Integer.parseInt(scan.nextLine());
 
@@ -152,7 +142,11 @@ public class Department {
                         DaysOfWeek realDay = DaysOfWeek.valueOf(data[0].trim());
                         int startT = Integer.parseInt(data[1].trim());
                         int endT = Integer.parseInt(data[2].trim());
-                        TimeBlock courseBlock = new TimeBlock(realDay, startT, endT);
+                        TimeBlock courseBlock = new TimeBlock();
+                        courseBlock.setDay(realDay);
+                        courseBlock.setStartTime(startT);
+                        courseBlock.setEndTime(endT);
+                        courseBlock.setComments(courseName);
 
                         course.addTimeBlock(courseBlock);
 
@@ -171,7 +165,11 @@ public class Department {
                     int startT = Integer.parseInt(data[1].trim());
                     int endT = Integer.parseInt(data[2].trim());
 
-                    TimeBlock officeHr = new TimeBlock(realDay, startT, endT);
+                    TimeBlock officeHr = new TimeBlock();
+                    officeHr.setDay(realDay);
+                    officeHr.setStartTime(startT);
+                    officeHr.setEndTime(endT);
+                    officeHr.setComments("Office Hours");
                     fac.addOfficeHours(officeHr);
 
                 }
@@ -187,9 +185,16 @@ public class Department {
                     int startT = Integer.parseInt(data[1].trim());
                     int endT = Integer.parseInt(data[2].trim());
 
-                    TimeBlock block = new TimeBlock(realDay, startT, endT, description);
-                    Appointment apt = new Appointment(block);
-
+                    TimeBlock block = new TimeBlock();
+                    block.setDay(realDay);
+                    block.setStartTime(startT);
+                    block.setEndTime(endT);
+                    block.setComments(description);
+                    
+                    Appointment apt = new Appointment();
+                    apt.setTimeBlock(block);
+                    apt.setDescription(block.getComments());
+                    
                     fac.addAppointment(apt);
 
                 }
@@ -223,7 +228,7 @@ public class Department {
         }
 
     }
-    public String atAGlance(int time) {
+    public String atAGlance(DaysOfWeek day, int time) {
         String result = "";
         ArrayList<TimeBlock> times;
 
@@ -231,13 +236,13 @@ public class Department {
 
             times = new ArrayList<>();
 
-            for (Course tempCourse : tempFaculty.getCoursesList()) {
+            for (int j = 0; j < tempFaculty.getCourseSize(); j++) {
 
-                for (TimeBlock tempTime : tempCourse.getTimeBlocks()) {
+                for (int i = 0; i < tempFaculty.getCourse(j).getTimeBlocksSize(); i++) {
 
-                    if (isDuringTime(tempTime, time)) {
+                    if(isDuringTime(day,tempFaculty.getCourse(j).getTimeBlock(i),time)) {
 
-                        times.add(tempTime);
+                        times.add(tempFaculty.getCourse(j).getTimeBlock(i));
 
                     }
 
@@ -245,32 +250,31 @@ public class Department {
 
             }
 
-            for (Appointment apt : tempFaculty.getAppointmentsList()) {
+            for (int i = 0; i < tempFaculty.getAppointmentsize(); i++) {
 
-                TimeBlock aptTimeBlock = apt.getTimeBlock();
+                TimeBlock aptTimeBlock = tempFaculty.getAppointment(i).getTimeBlock();
 
-                if (isDuringTime(aptTimeBlock, time)) {
-
+                if (isDuringTime(day,aptTimeBlock,time)) {
+                    
                     times.add(aptTimeBlock);
                 }
             }
 
-            for (TimeBlock officeHr : tempFaculty.getOfficeHoursList()) {
+            for (int i = 0; i < tempFaculty.getOfficeHoursSize(); i++) {
 
-                if (isDuringTime(officeHr, time)) {
+                if (isDuringTime(day,tempFaculty.getOfficeHour(i), time)) {
 
-                    times.add(officeHr);
+                    times.add(tempFaculty.getOfficeHour(i));
                 }
 
             }
 
-            result += tempFaculty.getFirstName() + System.lineSeparator()
-                    + tempFaculty.getLastName() + System.lineSeparator();
+            result += tempFaculty.getFirstName() + " " + tempFaculty.getLastName() + System.lineSeparator();
+                   
 
             for (TimeBlock tempTime : times) {
 
-                result += tempTime.toString();
-
+                result += String.format("\t%-30s%d-%d\n",tempTime.getComments(),tempTime.getStartTime(),tempTime.getEndTime());
             }
 
         }

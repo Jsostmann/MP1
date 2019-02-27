@@ -50,20 +50,7 @@ public class Faculty {
     public void setOfficeLocation(String officeLocation) {
         this.officeLocation = officeLocation;
     }
-    
-    public ArrayList<Appointment> getAppointmentsList() {
-        
-        return this.appointments;
-    }
-    public ArrayList<Course> getCoursesList() {
-    
-        return this.courses;
-    }
-    public ArrayList<TimeBlock> getOfficeHoursList() {
-        return this.officeHours;
-    }
-    
-    
+  
     /*
       Widget Methods For ArrayList Objects
     */ 
@@ -79,6 +66,37 @@ public class Faculty {
     
         officeHours.add(officeHrs);
     }
+    public Appointment getAppointment(int index){
+        if(index > -1 && index < appointments.size()) {
+            return appointments.get(index);
+        } else {
+            return null;
+        }
+    }
+    public Course getCourse(int index){
+        if(index > -1 && index < courses.size()) {
+            return courses.get(index);
+        } else {
+            return null;
+        }
+    }
+    public TimeBlock getOfficeHour(int index){
+        if(index > -1 && index < officeHours.size()) {
+            return officeHours.get(index);
+        } else {
+            return null;
+        }
+    }
+    public int getAppointmentsize(){
+        return appointments.size();
+    }
+    public int getCourseSize() {
+        return courses.size();
+    }
+    public int getOfficeHoursSize() {
+        return officeHours.size();
+    }
+   
     
     
     @Override
@@ -145,14 +163,15 @@ public class Faculty {
         for(String day: days) {
             
             times = new ArrayList<>();
+            result += day + System.lineSeparator();
             
             for(Course tempCourse: courses){
             
-                for(TimeBlock courseTime: tempCourse.getTimeBlocks()) {
+                for(int i = 0; i < tempCourse.getTimeBlocksSize(); i++) {
                 
-                    if(DaysOfWeek.valueOf(day).equals(courseTime.getDay())){
+                    if(DaysOfWeek.valueOf(day).equals(tempCourse.getTimeBlock(i).getDay())){
                     
-                        times.add(courseTime);
+                        times.add(tempCourse.getTimeBlock(i));
                     
                     }
                     
@@ -185,8 +204,7 @@ public class Faculty {
                 for(TimeBlock temp: times){
                 
                        if(temp.getStartTime() == i) {
-                       
-                           result += temp.toString();
+                          result += String.format("\t %-30s %d - %d \n",temp.getComments(),temp.getStartTime(),temp.getEndTime());
                        
                        }
                 
@@ -194,12 +212,18 @@ public class Faculty {
             
             
             }
+            
+            
         
         }
     
+ 
+        
         return result;
     
     }
+    
+    
     
     
     

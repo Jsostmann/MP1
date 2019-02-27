@@ -8,29 +8,12 @@ public class TimeBlock {
     private String comments;
     private String location;
 
-    public TimeBlock(DaysOfWeek day, int startTime, int endTime) {
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public TimeBlock() {
+        
 
     }
-    public TimeBlock(DaysOfWeek day, int startTime, int endTime, String comments) {
-
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.comments = comments;
-
-    }
-    public TimeBlock(DaysOfWeek day, int startTime, int endTime, String comments, String location) {
-
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.comments = comments;
-        this.location = location;
-
-    }
+  
+  
 
     /*
       Getters and Setters
@@ -76,14 +59,7 @@ public class TimeBlock {
         return day + ", " + startTime + ", " + endTime + System.lineSeparator();
     }
     
-    /*
-      Implemented Project Method
-    */
-    public String getFormatedTimeBlock() {
-
-        return startTime + " - " + endTime + " \t" + comments + "\t" + location;
-
-    }
+   
 
  
 

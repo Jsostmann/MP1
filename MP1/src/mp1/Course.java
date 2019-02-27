@@ -9,11 +9,11 @@ public class Course {
     private String location;
     private ArrayList<TimeBlock> timeBlocks;
     
-    public Course(String courseName ,String location) {
+    public Course() {
         
         timeBlocks = new ArrayList<>();
-        this.courseName = courseName;
-        this.location = location;
+        this.courseName = null;
+        this.location = null;
     }
 
     /*
@@ -33,20 +33,25 @@ public class Course {
         this.location = location;
     }
     
-    public ArrayList<TimeBlock> getTimeBlocks() {
-        return timeBlocks;
-    }
-    public void setTimeBlocks(ArrayList<TimeBlock> timeBlocks) {
-        this.timeBlocks = timeBlocks;
-    }
+    
     
     /*
       Widget Methods For ArrayList Objects
     */
     public void addTimeBlock(TimeBlock block) {
-        
         timeBlocks.add(block);
     }
+    public TimeBlock getTimeBlock(int index){
+        if(index > -1 && index < timeBlocks.size()) {
+            return timeBlocks.get(index);
+        } else {
+            return null;
+        }
+    }
+    public int getTimeBlocksSize(){
+        return timeBlocks.size();
+    }
+    
    
 
     @Override

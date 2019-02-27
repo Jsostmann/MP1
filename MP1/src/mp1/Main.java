@@ -71,7 +71,7 @@ public class Main {
     }
         
         Department d = new Department();
-
+        
         if (args.length == 0) {
 
             JFileChooser j = new JFileChooser();
@@ -84,7 +84,11 @@ public class Main {
                 
                 String fName = j.getSelectedFile().getAbsolutePath();
                 d.loadDepartmentData(fName);
-                JOptionPane.showMessageDialog(null, d.toString(), d.getUniversityName() + " Output", JOptionPane.PLAIN_MESSAGE);
+                System.out.println(d);
+                System.out.println(d.getFaculty(0).getCalendar());
+                System.out.println(d.atAGlance(DaysOfWeek.Monday,1305));
+                JOptionPane.showMessageDialog(null, d.getFaculty(0).getCalendar(), d.getUniversityName() + " Output", JOptionPane.PLAIN_MESSAGE);
+              
             }
             
         } else if (args.length == 1) {

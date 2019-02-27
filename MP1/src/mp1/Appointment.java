@@ -6,10 +6,10 @@ public class Appointment {
     private String description;
     private TimeBlock timeBlock;
 
-    public Appointment(TimeBlock timeBlock) {
+    public Appointment() {
 
-        this.timeBlock = timeBlock;
-        this.description = timeBlock.getComments();
+        this.timeBlock = null;
+        this.description = null;
 
     }
 
@@ -35,15 +35,4 @@ public class Appointment {
         return description + System.lineSeparator() + timeBlock.toString();
     }
     
-    /*
-      Implemented Project Method
-    */
-    public String getFormattedTimeBlocks() {
-
-        return this.timeBlock.getFormatedTimeBlock() + System.lineSeparator();
-
-    }
-
-   
-
 }
