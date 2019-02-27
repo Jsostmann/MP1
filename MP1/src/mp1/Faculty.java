@@ -15,14 +15,14 @@ public class Faculty {
     private ArrayList<Appointment> appointments;
     
     
-    public Faculty(String firstName, String lastName, String officeLocation) {
+    public Faculty() {
             courses = new ArrayList<>();
             officeHours = new ArrayList<>();
             appointments = new ArrayList<>();
             
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.officeLocation = officeLocation;
+            this.firstName = null;
+            this.lastName = null;
+            this.officeLocation = null;
                   
     }
 
@@ -127,7 +127,7 @@ public class Faculty {
     }
     private String getOfficeHours(){
         
-        String result = "";
+        String result = "Office Hours" + System.lineSeparator();
         
         for(TimeBlock temp: officeHours) {
         

@@ -9,7 +9,11 @@ public class TimeBlock {
     private String location;
 
     public TimeBlock() {
-        
+        day = null;
+        startTime = 0;
+        endTime = 0;
+        comments = null;
+        location = null;
 
     }
   

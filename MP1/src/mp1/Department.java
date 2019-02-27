@@ -121,7 +121,10 @@ public class Department {
                 String lName = scan.nextLine();
                 String officeLocation = scan.nextLine();
 
-                Faculty fac = new Faculty(fName, lName, officeLocation);
+                Faculty fac = new Faculty();
+                fac.setFirstName(fName);
+                fac.setLastName(lName);
+                fac.setOfficeLocation(officeLocation);
                 int numCourses = Integer.parseInt(scan.nextLine());
 
                 for (int i = 0; i < numCourses; i++) {
